@@ -52,5 +52,83 @@ h6 {
   background: var(--grey) !important;
 }
 
+.btn-01 {
+  background-color: var(--yellow) !important;
+  color: var(--dark) !important;
+  border: 1px solid var(--yellow) !important;
+}
+
+.btn-01:hover {
+  background-color: #fff !important;
+  color: var(--yellow) !important;
+}
+
+/* Navbar css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background: #1f2937; */
+  padding: 1rem 1.5rem;
+  color: white;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-links a.active {
+  font-weight: bold;
+  color: #facc15;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.bar {
+  height: 3px;
+  width: 25px;
+  background: rgb(0, 0, 0);
+  margin: 4px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    flex-direction: column;
+    background: #1f2937;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* For Desktop css */
 @media (min-width: 991px) {
 }

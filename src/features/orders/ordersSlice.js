@@ -12,7 +12,11 @@ const ordersSlice = createSlice({
   reducers: {
     setOrders: (state, action) => {
       state.orders = action.payload;
+      if (action.payload.length > 0) {
+        state.selectedOrder = action.payload[0]; // ✅ auto-select first
+      }
     },
+
     selectOrder: (state, action) => {
       state.selectedOrder = action.payload;
     },

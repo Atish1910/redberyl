@@ -14,7 +14,7 @@
 }
 
 body {
-  font-size: 12px;
+  font-size: 12px !important;
   font-family: var(--font_01);
   background-color: #f1f1f154 !important;
   font-display: swap;
@@ -159,14 +159,39 @@ h6 {
 }
 
 .order-details .company {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .order-details .contact {
-  font-size: 14px;
+  font-size: 12px;
   text-decoration: none;
 }
+.order-details .key, .order-details .value{
+  font-size: 12px;
+}
 
+.passport-img{
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.personal-info a{
+  text-decoration: none;
+  color: black;
+  padding-bottom: 10px;
+}
+.bg-active{
+  background-color: var(--grey) !important;
+}
+.order-01 .card-header{
+  font-size: 12px !important;
+  background-color: #0d6efd24 !important;
+
+}
+.order-01 .card-title{
+  font-size: 13px !important;
+}
 /* For Desktop css */
 @media (min-width: 991px) {
 }

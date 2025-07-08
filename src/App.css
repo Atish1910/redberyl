@@ -3,6 +3,7 @@
 :root {
   --purple: #4b1d3a;
   --light: #f1f3fa;
+  --white: #fff;
   --dark: #1c1c1c;
   --yellow: #ffb81c;
   --red: #c10016;
@@ -13,9 +14,9 @@
 }
 
 body {
-  font-size: 14px;
+  font-size: 12px;
   font-family: var(--font_01);
-  background-color: #f1f1f1;
+  background-color: #f1f1f154 !important;
   font-display: swap;
 }
 
@@ -53,14 +54,16 @@ h6 {
 }
 
 .btn-01 {
-  background-color: var(--yellow) !important;
+  font-size: 14px !important;
+  background-color: var(--white) !important;
   color: var(--dark) !important;
-  border: 1px solid var(--yellow) !important;
+  border: 1px solid var(--dark) !important;
 }
 
 .btn-01:hover {
   background-color: #fff !important;
-  color: var(--yellow) !important;
+  color: var(--bs-primary) !important;
+  border: 1px solid var(--bs-primary) !important;
 }
 
 /* Navbar css */
@@ -127,6 +130,41 @@ h6 {
   .hamburger {
     display: flex;
   }
+}
+/*  left-navbar ///////////////////////////////// */
+
+.left-navbar .order-id {
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+.left-navbar .order-company {
+  font-size: 12px !important;
+}
+.left-navbar .badge {
+  font-size: 10px !important;
+}
+.left-navbar .bi-arrow-right {
+  font-size: 12px !important;
+}
+
+/*  Order list ///////////////////////////////// */
+.order-details .order-id {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.order-details .badge {
+  font-size: 10px;
+}
+
+.order-details .company {
+  font-size: 14px;
+}
+
+.order-details .contact {
+  font-size: 14px;
+  text-decoration: none;
 }
 
 /* For Desktop css */

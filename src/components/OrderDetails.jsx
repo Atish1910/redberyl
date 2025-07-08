@@ -8,58 +8,49 @@ const OrderDetails = () => {
   if (!order) return null;
 
   return (
-    <div className="card">
-      <div className="card-header d-flex justify-content-between">
-        <strong>Order #{order.id}</strong>
-        <span className={`badge bg-${getBadgeClass(order.status)}`}>
-          {order.status}
-        </span>
+    <>
+      <div className="row order-details border rounded-3 pt-3 bg-white">
+        <div className="col-lg-7 ">
+          <div className="order-id">
+            #IN1001{" "}
+            <span className={`badge bg-success mx-3 `}>in progress</span>
+          </div>
+          <div className="pt-2">
+            <p className="company">
+              Infosys Pvt Ltd
+              <a href="callto:8888428371" className="ps-3 contact">
+                contact_person
+              </a>
+            </p>
+          </div>
+        </div>
+        <div className="col-lg-5 text-end">
+          <button className="btn btn-01 me-3">
+            <i class="bi bi-printer pe-2"></i>Print
+          </button>
+          <button className="btn btn-01">
+            <i class="bi bi-download pe-2"></i>Save As Pdf
+          </button>
+        </div>
       </div>
-      <div className="card-body">
-        <h5 className="card-title">
-          {order.company} | {order.state}
-        </h5>
-        <p>
-          <strong>Order Date:</strong> {order.orderDate}
-        </p>
-        <p>
-          <strong>Expected:</strong> {order.expectedDate}
-        </p>
-        <p>
-          <strong>Completion:</strong> {order.completionDate}
-        </p>
-        <p>
-          <strong>Service Level:</strong> {order.serviceLevel}
-        </p>
-        <p>
-          <strong>Email:</strong> {order.email}
-        </p>
-
-        <hr />
-        <h6>Receipt</h6>
-        <p>State Filing: ${order.stateFiling}</p>
-        <p>Agent Fee: ${order.agentFee}</p>
-
-        <hr />
-        <h6>Contact</h6>
-        <p>
-          <strong>{order.contact.name}</strong> ({order.contact.role})
-        </p>
-        <p>{order.contact.phone}</p>
-        <p>{order.contact.email}</p>
-        <p>{order.contact.address}</p>
-
-        <hr />
-        <h6>Order History</h6>
-        <ul>
-          {order.history.map((entry, idx) => (
-            <li key={idx}>
-              {entry.message} - <em>{entry.date}</em>
-            </li>
-          ))}
-        </ul>
+      <div className="row mt-4 border rounded-3 pt-3 bg-white">
+        <div className="col-lg-8">
+          <div className="row mb-5">
+            <div className="col-lg-3">
+              <div className="">
+                <h6 className="mb-0 fw-bold">Placed By</h6>
+                <p>Ravi Kumar</p>
+              </div>
+              <div className="">
+                <h6 className="mb-0 fw-bold">Order Date</h6>
+                <p>Mar 20, 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-lg-4"></div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -5,7 +5,7 @@ import { setOrders, selectOrder } from "./features/orders/ordersSlice";
 import OrdersList from "./features/orders/OrdersList";
 import OrderDetails from "./components/OrderDetails";
 import sampleData from "./data/sampleOrders";
-
+import "./App.css";
 function App() {
   const dispatch = useDispatch();
   const selectedOrder = useSelector((state) => state.orders.selectedOrder);
@@ -22,7 +22,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="container-fluid p-4">
+    <div className="container p-4">
       <h3 className="mb-4">Orders</h3>
       <div className="row">
         <div className="col-md-4">

@@ -8,20 +8,34 @@ const OrdersList = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="list-group">
+    <ul className="list-group border py-3 left-navbar">
+      <div className="ps-2">
+        <h6>
+          Orders : &nbsp;
+          <span className="text-primary text-white bg-primary rounded-pill p-1">
+            {orders.length}
+          </span>
+        </h6>
+      </div>
       {orders.map((order) => (
         <button
           key={order.id}
           className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center`}
           onClick={() => dispatch(selectOrder(order))}
         >
-          <span>{order.id}</span>
-          <span className={`badge bg-${getBadgeClass(order.status)}`}>
-            {order.status}
-          </span>
+          <p className="mb-0">
+            <span className="text-bold d-block order-id">{order.id}</span>
+            <span className="text-bold order-company">{order.company}</span>
+          </p>
+          <p>
+            <span className={`badge bg-${getBadgeClass(order.status)} me-3`}>
+              {order.status}
+            </span>
+            <i class="bi bi-arrow-right"></i>
+          </p>
         </button>
       ))}
-    </div>
+    </ul>
   );
 };
 

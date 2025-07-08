@@ -1,24 +1,42 @@
-import toast from "react-hot-toast";
-import "./App.css";
-import Comp1 from "./components/Comp1";
-import Comp2 from "./components/Comp2";
-import Comp3 from "./components/Comp3";
-import Navbar from "./components/Navbar";
-import { Route, Routes } from "react-router-dom";
+// App.js
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setOrders, selectOrder } from "./features/orders/ordersSlice";
+import OrdersList from "./features/orders/OrdersList";
+import OrderDetails from "./components/OrderDetails";
+import sampleData from "./data/sampleOrders";
 
 function App() {
-  function clickMe() {
-    toast.success("I am Curreently Working");
-  }
+  const dispatch = useDispatch();
+  const selectedOrder = useSelector((state) => state.orders.selectedOrder);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("orders"));
+    if (data) {
+      dispatch(setOrders(data));
+    } else {
+      localStorage.setItem("orders", JSON.stringify(sampleData));
+      // dispatch(setOrders(sampleData));
+      dispatch(setOrders(sampleData));
+    }
+  }, [dispatch]);
+
   return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Comp1></Comp1>}></Route>
-        <Route path="/comp2" element={<Comp2></Comp2>}></Route>
-        <Route path="/comp3" element={<Comp3></Comp3>}></Route>
-      </Routes>
-    </>
+    <div className="container-fluid p-4">
+      <h3 className="mb-4">Orders</h3>
+      <div className="row">
+        <div className="col-md-4">
+          <OrdersList />
+        </div>
+        <div className="col-md-8">
+          {selectedOrder ? (
+            <OrderDetails />
+          ) : (
+            <p>Select an order to view details.</p>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

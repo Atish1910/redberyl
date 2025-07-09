@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 
 const OrderFilter = ({ orders, onFilter }) => {
   const [searchId, setSearchId] = useState("");
@@ -13,8 +14,8 @@ const OrderFilter = ({ orders, onFilter }) => {
   useEffect(() => {
     onFilter({ searchId, company, status });
   }, [searchId, company, status, onFilter]);
-
-    const handleFilter = () => {
+  
+  const handleFilter = () => {
     onFilter({ searchId, company, status });
   };
 
@@ -23,6 +24,7 @@ const OrderFilter = ({ orders, onFilter }) => {
     setCompany("");
     setStatus("");
     onFilter({ searchId: "", company: "", status: "" });
+    toast.success("Order list is clear")
   };
 
   return (

@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import html2pdf from "html2pdf.js";
 import OrderTabs from "./OrderTabs";
+import toast from "react-hot-toast";
 
 const OrderDetails = ({ photo }) => {
   const order = useSelector((state) => state.orders.selectedOrder);
@@ -25,6 +26,7 @@ const OrderDetails = ({ photo }) => {
     const element = pdfRef.current;
     const opt = pdfDownloadFormat;
     html2pdf().set(opt).from(element).save();
+    toast.success("Your Pdf is Downloaded successfully ");
   };
 
   // handle print pdf
@@ -40,6 +42,8 @@ const OrderDetails = ({ photo }) => {
         const blobUrl = pdf.output("bloburl");
         window.open(blobUrl, "_blank");
       });
+    
+      toast.success("Your pdf is ready You can download now");
   };
 
   return (

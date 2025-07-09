@@ -115,15 +115,15 @@ const OrderDetails = ({ photo }) => {
               </div>
               <div className="py-3 personal-info">
                 <p className="mb-1">
-                  <i className="bi bi-telephone text-primary pe-2"></i>{" "}
+                  <i className="bi bi-telephone text-primary pe-2"></i>
                   {order.contact.phone}
                 </p>
                 <p className="mb-1">
-                  <i className="bi bi-envelope text-primary pe-2"></i>{" "}
+                  <i className="bi bi-envelope text-primary pe-2"></i>
                   {order.contact.email}
                 </p>
                 <p className="mb-1">
-                  <i className="bi bi-geo-alt text-primary pe-2"></i>{" "}
+                  <i className="bi bi-geo-alt text-primary pe-2"></i>
                   {order.contact.address}
                 </p>
               </div>
@@ -135,6 +135,7 @@ const OrderDetails = ({ photo }) => {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           order={order}
+          photo={photo}
         ></OrderTabs>
       </div>
     </>

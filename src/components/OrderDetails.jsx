@@ -1,21 +1,24 @@
-import React, { useRef, useState } from "react";
+import React, { Suspense, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import html2pdf from "html2pdf.js";
-import OrderTabs from "./OrderTabs";
 import toast from "react-hot-toast";
 
-const OrderDetails = ({ photo }) => {
+const OrderDetails = ({ photo, getBadgeClass }) => {
   const order = useSelector((state) => state.orders.selectedOrder);
   const [activeTab, setActiveTab] = useState("details");
   const pdfRef = useRef();
 
-  if (!order) return null;
+  const OrderTabs = React.lazy(() => import("./OrderTabs"));
+
+  if (!order) return <p className="text-center mt-5">Please select an order to view details</p>;
 
   // ⬇️ Function to handle PDF download
   // pdf download format
+  const slug = order.company.replace(/\s+/g, "_");
+
   const pdfDownloadFormat = {
     margin: 0.5,
-    filename: `${order.company.replace(/\s+/g, "_")}_${order.id}.pdf`,
+    filename: `${slug}_${order.id}.pdf`,
     image: { type: "jpeg", quality: 0.98 },
     html2canvas: { scale: 2 },
     jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
@@ -54,7 +57,7 @@ const OrderDetails = ({ photo }) => {
           <div className="col-lg-7 ">
             <div className="order-id">
               #{order.id}
-              <span className={`badge bg-${getBadgeClass(order.status)} mx-2`}>
+              <span className={`badge bg-${getBadgeClass(order.status)} mx-3`}>
                 {order.status}
               </span>
             </div>
@@ -68,10 +71,10 @@ const OrderDetails = ({ photo }) => {
             </div>
           </div>
           <div className="col-lg-5 text-lg-end pb-4">
-            <button className="btn btn-01 me-3" onClick={handlePrintPDF}>
+            <button className="btn  btn-sm btn-01 me-3" onClick={handlePrintPDF}>
               <i className="bi bi-printer pe-2"></i>Print
             </button>
-            <button className="btn btn-01" onClick={handleDownloadPDF}>
+            <button className="btn btn-sm  btn-01" onClick={handleDownloadPDF}>
               <i className="bi bi-download pe-2"></i>Save As Pdf
             </button>
           </div>
@@ -134,37 +137,18 @@ const OrderDetails = ({ photo }) => {
           </div>
         </div>
 
+        <Suspense fallback={<div>Loading Tabs...</div>}>
         <OrderTabs
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           order={order}
           photo={photo}
         ></OrderTabs>
+        </Suspense>
       </div>
     </>
   );
 };
 
-const getBadgeClass = (status) => {
-  switch (status.toLowerCase()) {
-    case "complete":
-      return "success";
-    case "in progress":
-      return "info";
-    case "approval pending":
-      return "warning";
-    case "draft":
-      return "secondary";
-    case "review":
-      return "warning";
-    case "submitted":
-    case "created":
-      return "primary";
-    case "query raised":
-      return "danger";
-    default:
-      return "dark";
-  }
-};
 
 export default OrderDetails;

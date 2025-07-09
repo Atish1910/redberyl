@@ -70,10 +70,10 @@ const OrderFilter = ({ orders, onFilter }) => {
       </div>
 
       <div className="col-lg-3 col-6 mb-2  align-items-center">
-        <button className="btn  btn-primary px-3 me-3 d-none d-lg-inline" onClick={handleFilter}>
+        <button className="btn  btn-sm  btn-primary px-3 me-3 d-none d-lg-inline" onClick={handleFilter}>
                 Filter
                 </button>
-        <button className="btn btn-01" onClick={handleClear}>
+        <button className="btn  btn-sm btn-01" onClick={handleClear}>
           Clear Filter
         </button>
       </div>

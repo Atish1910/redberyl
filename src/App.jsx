@@ -13,18 +13,18 @@ import toast from "react-hot-toast";
 function App() {
   const dispatch = useDispatch();
   const allOrders = useSelector((state) => state.orders.orders); //  fetch all orders
-  const selectedOrder = useSelector((state) => state.orders.selectedOrder);  // fetch selected order
-
   const [filteredOrders, setFilteredOrders] = useState([]);
+  const notifyNotAvailable = () => toast.error("Functionality not yet implemented");
 
-useEffect(() => {
-  dispatch(setOrders(sampleData)); // Always load fresh data from JS file
-}, [dispatch]);
+  useEffect(() => {
+    dispatch(setOrders(sampleData)); // Always load fresh data from JS file
+  }, [dispatch]);
 
   // Set default filtered orders when allOrders change
   useEffect(() => {
     setFilteredOrders(allOrders);
   }, [allOrders]);
+
 
   // Callback from OrderFilter
   const handleFilter = ({ searchId, company, status }) => {
@@ -45,6 +45,24 @@ useEffect(() => {
     setFilteredOrders(result);
   };
 
+  
+  // Mapping object for badge classes
+  const badgeClassMap = {
+    "complete": "success",
+    "in progress": "info",
+    "approval pending": "warning",
+    "draft": "secondary",
+    "review": "warning",
+    "submitted": "primary",
+    "created": "primary",
+    "query raised": "danger",
+  };
+
+  // Optimized function
+  const getBadgeClass = (status = "") =>
+  badgeClassMap[status.toLowerCase()] || "dark";
+
+
   return (
     <div className="container-fluid">
       <div className="row order-details py-3 text-center text-lg-start">
@@ -54,14 +72,14 @@ useEffect(() => {
           </div>
           <div className="col-lg-6 text-lg-end pb-4">
             
-            <button className="btn btn-01 me-3"  onClick={() => toast.error("Functanility is not yet created")}>
+            <button className="btn btn-sm btn-01 me-3"  onClick={notifyNotAvailable}>
               <i className="bi bi-pencil-square pe-2"></i>View Drafts
             </button>
 
-            <button className="btn btn-01 me-3"  onClick={() => toast.error("Functanility is not yet created")}>
+            <button className="btn  btn-sm btn-01 me-3"  onClick={notifyNotAvailable}>
               <i className="bi bi-download pe-2"></i>Export csv
             </button>
-            <button className="btn btn-primary mt-3 mt-lg-0" onClick={() => toast.error("Functanility is not yet created")}>
+            <button className="btn  btn-sm btn-primary mt-3 mt-lg-0" onClick={notifyNotAvailable}>
               <i className="bi bi-plus-lg pe-2" ></i>Create new Order 
             </button>
           </div>
@@ -69,17 +87,12 @@ useEffect(() => {
 
       {/* 🔍 Filter Component Above Both Sections */}
       <OrderFilter orders={allOrders} onFilter={handleFilter} />
-
       <div className="row mt-4">
         <div className="col-md-3">
-          <OrdersList orders={filteredOrders} />
+          <OrdersList orders={filteredOrders} getBadgeClass={getBadgeClass} />
         </div>
         <div className="col-md-9">
-          {selectedOrder ? (
-            <OrderDetails photo={photo} />
-          ) : (
-            <p>Select an order to view details.</p>
-          )}
+            <OrderDetails photo={photo}  getBadgeClass={getBadgeClass}/>
         </div>
       </div>
     </div>

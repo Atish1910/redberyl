@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectOrder } from "./ordersSlice";
 
-const OrdersList = ({ orders }) => {
+const OrdersList = ({ orders, getBadgeClass}) => {
   const selectedOrder = useSelector((state) => state.orders.selectedOrder);
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ const OrdersList = ({ orders }) => {
     <ul className="list-group border py-3 left-navbar">
       <div className="px-3 mt-2">
         <h6>
-          Orders:{" "}
+          Orders:
           <span className="text-primary text-white bg-primary rounded-pill p-1">
             {orders.length}
           </span>
@@ -78,29 +78,6 @@ const OrdersList = ({ orders }) => {
       </div>
     </ul>
   );
-};
-
-const getBadgeClass = (status) => {
-  switch (status.toLowerCase()) {
-    case "complete":
-      return "success";
-    case "in progress":
-      return "info";
-    case "approval pending":
-      return "warning";
-    case "draft":
-      return "secondary";
-    case "review":
-      return "warning";
-    case "submitted":
-      return "primary";
-    case "created":
-      return "primary";
-    case "query raised":
-      return "danger";
-    default:
-      return "dark";
-  }
 };
 
 export default OrdersList;

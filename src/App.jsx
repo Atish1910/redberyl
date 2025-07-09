@@ -11,20 +11,14 @@ import photo from "../src/assets/img/profile/photo.jpeg";
 
 function App() {
   const dispatch = useDispatch();
-  const allOrders = useSelector((state) => state.orders.orders);
-  const selectedOrder = useSelector((state) => state.orders.selectedOrder);
+  const allOrders = useSelector((state) => state.orders.orders); //  fetch all orders
+  const selectedOrder = useSelector((state) => state.orders.selectedOrder);  // fetch selected order
 
   const [filteredOrders, setFilteredOrders] = useState([]);
 
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("orders"));
-    if (data) {
-      dispatch(setOrders(data));
-    } else {
-      localStorage.setItem("orders", JSON.stringify(sampleData));
-      dispatch(setOrders(sampleData));
-    }
-  }, [dispatch]);
+useEffect(() => {
+  dispatch(setOrders(sampleData)); // Always load fresh data from JS file
+}, [dispatch]);
 
   // Set default filtered orders when allOrders change
   useEffect(() => {

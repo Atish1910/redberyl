@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import html2pdf from "html2pdf.js";
+import OrderTabs from "./OrderTabs";
 
 const OrderDetails = ({ photo }) => {
   const order = useSelector((state) => state.orders.selectedOrder);
@@ -10,29 +11,26 @@ const OrderDetails = ({ photo }) => {
   if (!order) return null;
 
   // ⬇️ Function to handle PDF download
+  // pdf download format
+  const pdfDownloadFormat = {
+    margin: 0.5,
+    filename: `${order.company.replace(/\s+/g, "_")}_${order.id}.pdf`,
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+  };
+
+  // handle Download pdf
   const handleDownloadPDF = () => {
     const element = pdfRef.current;
-    const opt = {
-      margin: 0.5,
-      filename: `${order.company.replace(/\s+/g, "_")}_${order.id}.pdf`,
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-    };
+    const opt = pdfDownloadFormat;
     html2pdf().set(opt).from(element).save();
   };
 
+  // handle print pdf
   const handlePrintPDF = () => {
     const element = pdfRef.current;
-
-    const opt = {
-      margin: 0.5,
-      filename: `${order.id}_OrderDetails.pdf`,
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-    };
-
+    const opt = pdfDownloadFormat;
     html2pdf()
       .set(opt)
       .from(element)
@@ -133,190 +131,11 @@ const OrderDetails = ({ photo }) => {
           </div>
         </div>
 
-        {/* NEW TABS ROW */}
-        <div className="row mt-4">
-          <div className="col-12">
-            <ul className="nav nav-tabs">
-              <li className="nav-item">
-                <button
-                  className={`nav-link ${
-                    activeTab === "details" ? "active" : ""
-                  }`}
-                  onClick={() => setActiveTab("details")}
-                >
-                  Order Details
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  className={`nav-link ${
-                    activeTab === "requirements" ? "active" : ""
-                  }`}
-                  onClick={() => setActiveTab("requirements")}
-                >
-                  Order Requirements
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  className={`nav-link ${
-                    activeTab === "contacts" ? "active" : ""
-                  }`}
-                  onClick={() => setActiveTab("contacts")}
-                >
-                  Contacts
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  className={`nav-link ${
-                    activeTab === "documents" ? "active" : ""
-                  }`}
-                  onClick={() => setActiveTab("documents")}
-                >
-                  Documents
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  className={`nav-link ${
-                    activeTab === "status" ? "active" : ""
-                  }`}
-                  onClick={() => setActiveTab("status")}
-                >
-                  Status History
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  className={`nav-link ${
-                    activeTab === "manager" ? "active" : ""
-                  }`}
-                  onClick={() => setActiveTab("manager")}
-                >
-                  Account Manager
-                </button>
-              </li>
-            </ul>
-
-            {/* TAB CONTENT */}
-            <div className="tab-content border border-top-0 p-3 bg-white rounded-bottom">
-              {activeTab === "details" && (
-                <div className="row  order-01">
-                  <div className="col-lg-6">
-                    <div className="card">
-                      <h5 className="card-header text-primary">Receipt</h5>
-                      <div className="card-body border-bottom">
-                        <div className="d-flex align-items-center justify-content-between">
-                          <h6 className="card-title">State Filling</h6>
-                          <h6 className="card-title">${order.stateFiling}</h6>
-                        </div>
-                        <ul>
-                          <li>
-                            The Filling Fee For the application as per state
-                            selected
-                          </li>
-                          <li>Government fee</li>
-                        </ul>
-                      </div>
-
-                      <div className="card-body border-bottom">
-                        <div className="d-flex align-items-center justify-content-between">
-                          <h6 className="card-title">
-                            Registered Agent Service
-                          </h6>
-                          <h6 className="card-title">${order.agentFee}</h6>
-                        </div>
-                        <ul>
-                          <li>
-                            Fees To appoint Registered Agent to handle necessary
-                            government, tax & legal corrospondence about your
-                            business.{" "}
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-lg-6">
-                    <div className="card">
-                      <h5 className="card-header text-primary">
-                        Order history
-                      </h5>
-                      <div className="card-body border-bottom">
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center ">
-                            <i className="bi bi-check2-circle fs-3 text-success"></i>
-                            <div className="ps-3">
-                              <h6 className="card-title mb-0">Order Created</h6>
-                              <p className="mb-1">
-                                Processed By <a href="">customer_name</a>
-                              </p>
-                              <p className="mb-0">
-                                {order.history.orderMessage}
-                              </p>
-                            </div>
-                          </div>
-
-                          <h6 className="card-title mb-0">
-                            {order.history.oDate}
-                          </h6>
-                        </div>
-                      </div>
-                      <div className="card-body border-bottom">
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center ">
-                            <i class="bi bi-check2-circle fs-3 text-success"></i>
-                            <div className="ps-3">
-                              <h6 className="card-title mb-0">At State</h6>
-                              <p className="mb-1">
-                                Processed By <a href="">State_manager</a>
-                              </p>
-                              <p className="mb-0">
-                                {order.history.stateMessage}
-                              </p>
-                            </div>
-                          </div>
-
-                          <h6 className="card-title mb-0">
-                            {order.history.stateDate}
-                          </h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* <p><strong>Order Details:</strong> #{order.id} for <strong>{order.company}</strong></p> */}
-                </div>
-              )}
-              {activeTab === "requirements" && (
-                <p>
-                  <strong>Requirements will be displayed here...</strong>
-                </p>
-              )}
-              {activeTab === "contacts" && (
-                <p>
-                  <strong>Contacts tab content here...</strong>
-                </p>
-              )}
-              {activeTab === "documents" && (
-                <p>
-                  <strong>Documents tab content here...</strong>
-                </p>
-              )}
-              {activeTab === "status" && (
-                <p>
-                  <strong>Status History tab content here...</strong>
-                </p>
-              )}
-              {activeTab === "manager" && (
-                <p>
-                  <strong>Account Manager tab content here...</strong>
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
+        <OrderTabs
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          order={order}
+        ></OrderTabs>
       </div>
     </>
   );

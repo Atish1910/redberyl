@@ -7,7 +7,7 @@ import OrderDetails from "./components/OrderDetails";
 import OrderFilter from "./components/OrderFilter";
 import sampleData from "./data/sampleOrders";
 import "./App.css";
-import photo from "../public/img/profile/photo.jpeg";
+import photo from "../src/assets/img/profile/photo.jpeg";
 
 function App() {
   const dispatch = useDispatch();

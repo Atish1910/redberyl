@@ -44,7 +44,7 @@ const OrderDetails = ({ photo }) => {
 
   return (
     <>
-      <div className="container" ref={pdfRef}>
+      <div className="container-fluid" ref={pdfRef}>
         {/* Existing Order Header */}
         <div className="row order-details border rounded-3 pt-3 bg-white">
           <div className="col-lg-7 ">
@@ -114,13 +114,12 @@ const OrderDetails = ({ photo }) => {
                 </div>
               </div>
               <div className="py-3 personal-info">
+              <a href={`tel:${order.contact.phone}`} className=" contact">
+                  <i className="bi bi-telephone text-primary pe-2"></i>{order.contact.phone}</a>
+                
                 <p className="mb-1">
-                  <i className="bi bi-telephone text-primary pe-2"></i>
-                  {order.contact.phone}
-                </p>
-                <p className="mb-1">
-                  <i className="bi bi-envelope text-primary pe-2"></i>
-                  {order.contact.email}
+                  <a href={`mailto:${order.contact.email}`} className=" contact">
+                  <i className="bi bi-envelope text-primary pe-2"></i>{order.contact.email}</a>
                 </p>
                 <p className="mb-1">
                   <i className="bi bi-geo-alt text-primary pe-2"></i>

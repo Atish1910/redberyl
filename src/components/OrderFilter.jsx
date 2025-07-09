@@ -27,7 +27,7 @@ const OrderFilter = ({ orders, onFilter }) => {
 
   return (
     <div className="px-3 mb-2 row">
-      <div className="mb-2 col-lg-3">
+      <div className="mb-2 col-lg-3 col-6">
         <input
           type="text"
           className="form-control form-control-sm"
@@ -37,7 +37,7 @@ const OrderFilter = ({ orders, onFilter }) => {
         />
       </div>
 
-      <div className="mb-2 col-lg-3">
+      <div className="mb-2 col-lg-3 col-6">
         <select
           className="form-select form-select-sm"
           value={company}
@@ -52,7 +52,7 @@ const OrderFilter = ({ orders, onFilter }) => {
         </select>
       </div>
 
-      <div className="mb-2 col-lg-3">
+      <div className="mb-2 col-lg-3 col-6">
         <select
           className="form-select form-select-sm"
           value={status}
@@ -67,8 +67,8 @@ const OrderFilter = ({ orders, onFilter }) => {
         </select>
       </div>
 
-      <div className="col-lg-3 mb-2 d-flex align-items-center">
-        <button className="btn  btn-primary px-3 me-3" onClick={handleFilter}>
+      <div className="col-lg-3 col-6 mb-2  align-items-center">
+        <button className="btn  btn-primary px-3 me-3 d-none d-lg-inline" onClick={handleFilter}>
                 Filter
                 </button>
         <button className="btn btn-01" onClick={handleClear}>

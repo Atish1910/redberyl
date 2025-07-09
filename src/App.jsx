@@ -45,8 +45,26 @@ useEffect(() => {
   };
 
   return (
-    <div className="container-fluid p-4">
-      <h3 className="mb-4">Orders</h3>
+    <div className="container-fluid">
+      <div className="row order-details py-3 text-center text-lg-start">
+          <div className="col-lg-6 ">
+            <h3 className="mb-0">Orders</h3>
+            <p>Manage All Your Orders Here</p>
+          </div>
+          <div className="col-lg-6 text-lg-end pb-4">
+            
+            <button className="btn btn-01 me-3">
+              <i class="bi bi-pencil-square pe-2"></i>View Drafts
+            </button>
+
+            <button className="btn btn-01 me-3">
+              <i className="bi bi-download pe-2"></i>Export csv
+            </button>
+            <button className="btn btn-primary mt-3 mt-lg-0">
+              <i class="bi bi-plus-lg pe-2"></i>Create new Order 
+            </button>
+          </div>
+        </div>
 
       {/* 🔍 Filter Component Above Both Sections */}
       <OrderFilter orders={allOrders} onFilter={handleFilter} />

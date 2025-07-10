@@ -14,8 +14,7 @@ function App() {
   const dispatch = useDispatch();
   const allOrders = useSelector((state) => state.orders.orders); //  fetch all orders
   const [filteredOrders, setFilteredOrders] = useState([]);
-  const notifyNotAvailable = () =>
-    toast.error("Functionality not yet implemented");
+  const notifyNotAvailable = () => toast.error("This feature is coming soon!");
 
   useEffect(() => {
     dispatch(setOrders(sampleData)); // Always load fresh data from JS file
@@ -47,13 +46,13 @@ function App() {
 
   // name & background color
   const badgeClassMap = {
-    "complete ": "success",
+    complete: "success",
     "in progress": "info",
     "approval pending": "warning",
-    "draft ": "secondary",
-    "review ": "warning",
-    "submitted ": "primary",
-    "created ": "primary",
+    draft: "secondary",
+    review: "warning",
+    submitted: "primary",
+    created: "primary",
     "query raised": "danger",
   };
 

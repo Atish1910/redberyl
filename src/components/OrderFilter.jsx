@@ -6,25 +6,27 @@ const OrderFilter = ({ orders, onFilter }) => {
   const [company, setCompany] = useState("");
   const [status, setStatus] = useState("");
 
-  // Get unique companies and statuses for dropdowns
+  // Get all compnies & status
   const uniqueCompanies = [...new Set(orders.map((o) => o.company))];
   const uniqueStatuses = [...new Set(orders.map((o) => o.status))];
 
-  // Trigger filter on any change
+  // active filter on any change
   useEffect(() => {
     onFilter({ searchId, company, status });
   }, [searchId, company, status, onFilter]);
-  
+
+  // onclick filter(optional)
   const handleFilter = () => {
     onFilter({ searchId, company, status });
   };
 
+  // clear filter
   const handleClear = () => {
     setSearchId("");
     setCompany("");
     setStatus("");
     onFilter({ searchId: "", company: "", status: "" });
-    toast.success("Order list is clear")
+    toast.success("Order list is clear");
   };
 
   return (
@@ -46,8 +48,8 @@ const OrderFilter = ({ orders, onFilter }) => {
           onChange={(e) => setCompany(e.target.value)}
         >
           <option value="">Filter by Company</option>
-          {uniqueCompanies.map((comp, idx) => (
-            <option key={idx} value={comp}>
+          {uniqueCompanies.map((comp, i) => (
+            <option key={i} value={comp}>
               {comp}
             </option>
           ))}
@@ -61,8 +63,8 @@ const OrderFilter = ({ orders, onFilter }) => {
           onChange={(e) => setStatus(e.target.value)}
         >
           <option value="">Filter by Status</option>
-          {uniqueStatuses.map((stat, idx) => (
-            <option key={idx} value={stat}>
+          {uniqueStatuses.map((stat, i) => (
+            <option key={i} value={stat}>
               {stat}
             </option>
           ))}
@@ -70,9 +72,12 @@ const OrderFilter = ({ orders, onFilter }) => {
       </div>
 
       <div className="col-lg-3 col-6 mb-2  align-items-center">
-        <button className="btn  btn-sm  btn-primary px-3 me-3 d-none d-lg-inline" onClick={handleFilter}>
-                Filter
-                </button>
+        <button
+          className="btn  btn-sm  btn-primary px-3 me-3 d-none d-lg-inline"
+          onClick={handleFilter}
+        >
+          Filter
+        </button>
         <button className="btn  btn-sm btn-01" onClick={handleClear}>
           Clear Filter
         </button>

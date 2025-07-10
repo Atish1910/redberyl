@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectOrder } from "./ordersSlice";
 
-const OrdersList = ({ orders, getBadgeClass}) => {
-  const selectedOrder = useSelector((state) => state.orders.selectedOrder);
+const OrdersList = ({ orders, getBadgeClass }) => {
   const dispatch = useDispatch();
+  const selectedOrder = useSelector((state) => state.orders.selectedOrder);
 
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 10;
 
-  // Calculate visible orders
+  // on 1st page how many order are there
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
   const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
@@ -43,7 +43,9 @@ const OrdersList = ({ orders, getBadgeClass}) => {
         <button
           key={order.id}
           className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center 
-            ${selectedOrder?.id === order.id ? "active bg-active text-dark" : ""}`}
+            ${
+              selectedOrder?.id === order.id ? "active bg-active text-dark" : ""
+            }`}
           onClick={() => dispatch(selectOrder(order))}
         >
           <p className="mb-0">

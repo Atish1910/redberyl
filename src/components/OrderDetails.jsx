@@ -10,12 +10,14 @@ const OrderDetails = ({ photo, getBadgeClass }) => {
 
   const OrderTabs = React.lazy(() => import("./OrderTabs"));
 
-  if (!order) return <p className="text-center mt-5">Please select an order to view details</p>;
+  if (!order)
+    return (
+      <p className="text-center mt-5">Please select an order to view details</p>
+    );
 
-  // ⬇️ Function to handle PDF download
   // pdf download format
-  const slug = order.company.replace(/\s+/g, "_");
-
+  const slug = order.company.replace(/\s+/g, "_"); // pdf name
+  // pdf code
   const pdfDownloadFormat = {
     margin: 0.5,
     filename: `${slug}_${order.id}.pdf`,
@@ -45,14 +47,14 @@ const OrderDetails = ({ photo, getBadgeClass }) => {
         const blobUrl = pdf.output("bloburl");
         window.open(blobUrl, "_blank");
       });
-    
-      toast.success("Your pdf is ready You can download now");
+
+    toast.success("Your pdf is ready You can download now");
   };
 
   return (
     <>
       <div className="container-fluid" ref={pdfRef}>
-        {/* Existing Order Header */}
+        {/* Perticular order info */}
         <div className="row order-details border rounded-3 pt-3 bg-white">
           <div className="col-lg-7 ">
             <div className="order-id">
@@ -71,7 +73,10 @@ const OrderDetails = ({ photo, getBadgeClass }) => {
             </div>
           </div>
           <div className="col-lg-5 text-lg-end pb-4">
-            <button className="btn  btn-sm btn-01 me-3" onClick={handlePrintPDF}>
+            <button
+              className="btn  btn-sm btn-01 me-3"
+              onClick={handlePrintPDF}
+            >
               <i className="bi bi-printer pe-2"></i>Print
             </button>
             <button className="btn btn-sm  btn-01" onClick={handleDownloadPDF}>
@@ -80,7 +85,6 @@ const OrderDetails = ({ photo, getBadgeClass }) => {
           </div>
         </div>
 
-        {/* Existing Order Info Section */}
         <div className="row mt-4 border rounded-3 pt-3 bg-white order-details">
           <div className="col-lg-8">
             <div className="row mb-5">
@@ -121,12 +125,19 @@ const OrderDetails = ({ photo, getBadgeClass }) => {
                 </div>
               </div>
               <div className="py-3 personal-info">
-              <a href={`tel:${order.contact.phone}`} className=" contact">
-                  <i className="bi bi-telephone text-primary pe-2"></i>{order.contact.phone}</a>
-                
+                <a href={`tel:${order.contact.phone}`} className=" contact">
+                  <i className="bi bi-telephone text-primary pe-2"></i>
+                  {order.contact.phone}
+                </a>
+
                 <p className="mb-1">
-                  <a href={`mailto:${order.contact.email}`} className=" contact">
-                  <i className="bi bi-envelope text-primary pe-2"></i>{order.contact.email}</a>
+                  <a
+                    href={`mailto:${order.contact.email}`}
+                    className=" contact"
+                  >
+                    <i className="bi bi-envelope text-primary pe-2"></i>
+                    {order.contact.email}
+                  </a>
                 </p>
                 <p className="mb-1">
                   <i className="bi bi-geo-alt text-primary pe-2"></i>
@@ -137,18 +148,18 @@ const OrderDetails = ({ photo, getBadgeClass }) => {
           </div>
         </div>
 
+        {/* extra perticular  Order Info Section */}
         <Suspense fallback={<div>Loading Tabs...</div>}>
-        <OrderTabs
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          order={order}
-          photo={photo}
-        ></OrderTabs>
+          <OrderTabs
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            order={order}
+            photo={photo}
+          ></OrderTabs>
         </Suspense>
       </div>
     </>
   );
 };
-
 
 export default OrderDetails;

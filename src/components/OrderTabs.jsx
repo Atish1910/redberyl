@@ -204,7 +204,7 @@ const OrderTabs = ({ activeTab, setActiveTab, order, photo }) => {
                 </p>
                 <p className="mb-1">
                   <i className="bi bi-geo-alt text-primary pe-2"></i>Balewadi
-                  Plaza, Office No 201,2nd Floor, Near MITCON, Pune, Maharashtra
+                  Plaza, Office No 201,2nd Floor, Near MITCON, Pune, Maharashtra
                   – 411045
                 </p>
               </div>
